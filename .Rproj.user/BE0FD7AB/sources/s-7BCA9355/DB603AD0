@@ -1,0 +1,29 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1563552108724.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "DB603AD0",
+    "lastKnownWriteTime" : 9221120237041090560,
+    "last_content_update" : 1563552108724,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "cacheKey" : "5B293ABE",
+        "caption" : "mpls_roads",
+        "contentUrl" : "grid_resource/gridviewer.html?env=&obj=mpls_roads&cache_key=5B293ABE",
+        "displayedObservations" : 3185,
+        "environment" : "",
+        "object" : "mpls_roads",
+        "preview" : 0,
+        "totalObservations" : 3185,
+        "variables" : 9
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_dataframe"
+}

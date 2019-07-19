@@ -1,0 +1,20 @@
+
+mpls_point <- st_point(c(479526.8, 4980597)) %>%
+  st_sfc(crs = 26915)
+
+ggplot() +
+  geom_sf(data = mpls_roads, color = "gray80") +
+  geom_sf(data = st_buffer(mpls_point, 1300), color = "#e83778", fill = NA) +
+  theme_void() +
+  theme(panel.grid.major = element_line("transparent"))
+
+cropped_mpls_roads <- st_intersection(mpls_roads, st_buffer(mpls_point, 1500))
+
+
+ggplot(cropped_mpls_roads) +
+  geom_sf(color = "#515b72")  +
+  theme_void() +
+  theme(panel.grid.major = element_line("transparent"))
+
+
+ggsave("images/mpls.png", width = 2, height = 2)
