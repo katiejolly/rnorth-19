@@ -64,7 +64,7 @@ Think: aerial imagery, elevation models, remote sensing
 
 background-image: url("https://pvsmt99345.i.lithium.com/t5/image/serverpage/image-id/49570i26EF3FAEACD21BD4/image-size/medium?v=1.0&px=400")
 
-## Vector data `r emo::ji("round_pushpin")`📍
+## Vector data `r emo::ji("round_pushpin")`
 
 Think: Census data, points on a map, roads
 
@@ -77,40 +77,43 @@ class: inverse, center, middle
 
 ---
 
-# Hello World
+### Projections and coordinate reference systems
 
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
+How do you **translate** your data from a 3D shape to a 2D map...
 
-```{r eval=FALSE, tidy=FALSE}
-devtools::install_github("yihui/xaringan")
+```{r echo=FALSE}
+knitr::include_graphics("https://media.opennews.org/cache/06/37/0637aa2541b31f526ad44f7cb2db7b6c.jpg")
 ```
 
---
+---
 
-You are recommended to use the [RStudio IDE](https://www.rstudio.com/products/rstudio/), but you do not have to.
+### Two common projections for US data
 
-- Create a new R Markdown document from the menu `File -> New File -> R Markdown -> From Template -> Ninja Presentation`;<sup>1</sup>
+When working with something around the size of a **state** or **smaller**, it can often be a good idea to use state plane or UTM projections. <br>
 
---
+```{r echo = FALSE}
+knitr::include_graphics("images/projections.png")
+```
 
-- Click the `Knit` button to compile it;
+<br>
 
---
+Many states and cities also have **custom** or **recommended** projections, so it's worth doing some research before picking something! <br>
 
-- or use the [RStudio Addin](https://rstudio.github.io/rstudioaddins/)<sup>2</sup> "Infinite Moon Reader" to live preview the slides (every time you update and save the Rmd document, the slides will be automatically reloaded in RStudio Viewer.
+.footnote[Projection resources: [ArcGIS help](http://desktop.arcgis.com/en/arcmap/10.3/guide-books/map-projections/what-are-map-projections.htm), [Geocomputation with R: Reprojecting data](https://geocompr.robinlovelace.net/reproj-geo-data.html)]
 
-.footnote[
-[1] 中文用户请看[这份教程](http://slides.yihui.name/xaringan/zh-CN.html)
+<br>
 
-[2] See [#2](https://github.com/yihui/xaringan/issues/2) if you do not see the template or addin in RStudio.
-]
+
 
 ---
-background-image: url(`r xaringan:::karl`)
-background-position: 50% 50%
-class: center, bottom, inverse
 
-# You only live once!
+class: inverse, center, middle
+
+## Vacant buildings in Saint Paul `r emo::ji("cityscape")`
+
+---
+
+
 
 ---
 
