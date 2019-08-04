@@ -61,7 +61,7 @@ h1, h2, h3 {
   
 }
 .remark-slide-number {
-  color: #88B7B5;
+  color: #93E1D8;
   opacity: 1;
   font-size: 0.9em;
 }
@@ -89,12 +89,12 @@ a, a > code {
   color: #FFFFFF;
 }
 .title-slide, .title-slide h1, .title-slide h2, .title-slide h3 {
-  color: #000000;
+  color: #354a66;
 }
 .title-slide {
-  background-color: #88B7B5;
-  
-  
+  background-color: #93E1D8;
+  background-image: url(images/mpls.png);
+  background-size: cover;
   
 }
 .title-slide .remark-slide-number {
@@ -107,10 +107,10 @@ a, a > code {
   float: left;
 }
 .left-column h2, .left-column h3 {
-  color: #88B7B599;
+  color: #93E1D899;
 }
 .left-column h2:last-of-type, .left-column h3:last-child {
-  color: #88B7B5;
+  color: #93E1D8;
 }
 .right-column {
   width: 75%;

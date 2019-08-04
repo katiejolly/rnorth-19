@@ -1,7 +1,9 @@
 ---
 title: "Spatial Data Science in R"
-author: "Katie Jolly"
-date: "August 16, 2019 at rNorth"
+subtitle: "Katie Jolly"
+author: "Slides: katiejolly.io/rnorth-19"
+date: "August 16, 2019"
+institution: "Slides: katiejolly.io/rnorth-19"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -25,13 +27,15 @@ knitr::opts_chunk$set(fig.align="center", fig.width=5, fig.height=5, warning = F
 ```{r xaringan-themer, include = FALSE}
 library(xaringanthemer)
 duo_accent(
-  primary_color = "#88B7B5",
+  primary_color = "#93E1D8",
   secondary_color = "#310A31",
   header_font_google = google_font("Roboto", "400"),
   text_font_google   = google_font("Lato", "300"),
   code_font_family = "Fira Code",
   code_font_url = "https://cdn.rawgit.com/tonsky/FiraCode/1.204/distr/fira_code.css",
-  header_color = "#f54278"
+  header_color = "#f54278",
+  title_slide_text_color = "#354a66",
+  title_slide_background_image = "images/mpls.png"
 )
 ```
 
@@ -138,7 +142,7 @@ class: inverse, center, middle
 
 ---
 
-# Reading in spatial data
+## Reading in spatial data
 
 ### Shapefiles
 
@@ -158,7 +162,7 @@ honeybees <- st_read("data/honeybees/Honey_Bee_Permits_2017.shp")
 
 ---
 
-# Reading in spatial data
+## Reading in spatial data
 
 ### APIs
 
@@ -176,7 +180,7 @@ There are reasons for one way over another, but I prefer APIs when possible. Eit
 
 ---
 
-# Reprojecting data
+## Reprojecting data
 
 We should first check the current projection.
 
@@ -205,7 +209,7 @@ st_crs(honeybees_utm)
 
 ---
 
-# Basic maps
+## Basic maps
 
 `sf` objects have a `plot` function. 
 
@@ -215,7 +219,7 @@ plot(honeybees_utm %>% dplyr::select(HiveType))
 
 ---
 
-# Basic maps
+## Basic maps
 
 But they also work nicely with `ggplot2`
 
@@ -226,7 +230,7 @@ ggplot(honeybees_utm) +
 
 ---
 
-# Basic maps
+## Basic maps
 
 We can use the ggplot layering logic to add contextual data, like Minneapolis neighborhood boundaries.
 
@@ -252,7 +256,7 @@ ggplot() +
 
 ---
 
-# Basic maps
+## Basic maps
 
 ```{r echo = FALSE}
 library(showtext)
@@ -275,7 +279,7 @@ When I look at this map as a geographer, I look for patterns of clustering or di
 
 ---
 
-# Spatial join
+## Spatial join
 
 One way to think about clustering is to ask whether or not the permits are clustered **by neighborhood**. 
 
@@ -286,7 +290,7 @@ knitr::include_graphics("https://i.stack.imgur.com/CVVSH.png")
 
 ---
 
-# Spatial join
+## Spatial join
 
 ```{r}
 permits_per_nb <- neighborhoods %>% 
@@ -307,7 +311,7 @@ But is this equally likely everywhere in the city? Or are permits more likely to
 
 ---
 
-# Spatial join
+## Spatial join
 
 ```{r echo = FALSE, fig.width=6, fig.height=6}
 ggplot(permits_per_nb) +
@@ -324,7 +328,7 @@ ggplot(permits_per_nb) +
 
 ---
 
-# Neighbor definition
+## Neighbor definition
 
 Unfortunately for us, "neighborhoods" and "neighbors" have two very distinct meanings in this particular analysis. In spatial data analysis, we think of "neighbors" as how we define whether or not two objects are spatially related. 
 
@@ -334,7 +338,7 @@ knitr::include_graphics("http://geohealthinnovations.org/wp-content/uploads/2013
 
 ---
 
-# Neighbor definition
+## Neighbor definition
 
 One common and straightforward way to define neighbors is **queen contiguity**.
 
@@ -358,7 +362,7 @@ weights <- nb2listw(nb_queen, style = "B")
 
 ---
 
-# Neighbor definiton
+## Neighbor definiton
 
 ```{r echo = FALSE}
 coords <- coordinates(honeybees_sp)
@@ -372,7 +376,7 @@ On average, each of the neighborhoods in Minneapolis has **5.6** queen's case ne
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 
 ```{r echo = FALSE, fig.cap="Source: Manuel Gimond"}
@@ -381,7 +385,7 @@ knitr::include_graphics("https://mgimond.github.io/Spatial/img/Random_maps.png")
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 ### Moran's I
 
@@ -395,7 +399,7 @@ In order to test the significance of our correlation, we *randomly assign* attri
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 ### Moran's I
 
@@ -408,7 +412,7 @@ moran.mc(honeybees_sp$permits, weights, nsim=9999)
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 ### Moran's I
 
@@ -423,7 +427,7 @@ Based on this, we fail to reject our null hypothesis and say that the permits ar
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 ```{r echo = FALSE, fig.width=6, fig.height=6}
 ggplot(permits_per_nb) +
@@ -458,10 +462,10 @@ What if we look at honeybee permits by census block group instead?
 bg_mpls <- tigris::block_groups(state = "MN", county = "Hennepin") %>%
   st_as_sf() %>% 
   st_transform(26915) %>%
-  st_join(wards, join = st_intersects,
+  st_join(neighborhoods, join = st_intersects,
           left = FALSE) 
 
-bg_join <- st_join(bg_mpls, bee17)
+bg_join <- st_join(bg_mpls, honeybees_utm)
 
 bg <- bg_join %>%
   group_by(GEOID) %>%

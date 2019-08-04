@@ -3,7 +3,8 @@
   <head>
     <title>Spatial Data Science in R</title>
     <meta charset="utf-8">
-    <meta name="author" content="Katie Jolly" />
+    <meta name="author" content="Slides: katiejolly.io/rnorth-19" />
+    <meta name="date" content="2019-08-16" />
     <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
   </head>
   <body>
@@ -11,8 +12,9 @@
 class: center, middle, inverse, title-slide
 
 # Spatial Data Science in R
-### Katie Jolly
-### August 16, 2019 at rNorth
+## Katie Jolly
+### Slides: katiejolly.io/rnorth-19
+### August 16, 2019
 
 ---
 
@@ -122,7 +124,7 @@ class: inverse, center, middle
 
 ---
 
-# Reading in spatial data
+## Reading in spatial data
 
 ### Shapefiles
 
@@ -141,7 +143,7 @@ honeybees &lt;- st_read("data/honeybees/Honey_Bee_Permits_2017.shp")
 
 ---
 
-# Reading in spatial data
+## Reading in spatial data
 
 ### APIs
 
@@ -160,7 +162,7 @@ There are reasons for one way over another, but I prefer APIs when possible. Eit
 
 ---
 
-# Reprojecting data
+## Reprojecting data
 
 We should first check the current projection.
 
@@ -203,7 +205,7 @@ st_crs(honeybees_utm)
 
 ---
 
-# Basic maps
+## Basic maps
 
 `sf` objects have a `plot` function. 
 
@@ -216,7 +218,7 @@ plot(honeybees_utm %&gt;% dplyr::select(HiveType))
 
 ---
 
-# Basic maps
+## Basic maps
 
 But they also work nicely with `ggplot2`
 
@@ -230,7 +232,7 @@ ggplot(honeybees_utm) +
 
 ---
 
-# Basic maps
+## Basic maps
 
 We can use the ggplot layering logic to add contextual data, like Minneapolis neighborhood boundaries.
 
@@ -244,7 +246,7 @@ neighborhoods &lt;- st_read("https://opendata.arcgis.com/datasets/055ca54e5fcc47
 
 ---
 
-# Basic maps
+## Basic maps
 
 &lt;img src="index_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -254,7 +256,7 @@ When I look at this map as a geographer, I look for patterns of clustering or di
 
 ---
 
-# Spatial join
+## Spatial join
 
 One way to think about clustering is to ask whether or not the permits are clustered **by neighborhood**. 
 
@@ -263,7 +265,7 @@ One way to think about clustering is to ask whether or not the permits are clust
 
 ---
 
-# Spatial join
+## Spatial join
 
 
 ```r
@@ -290,14 +292,14 @@ But is this equally likely everywhere in the city? Or are permits more likely to
 
 ---
 
-# Spatial join
+## Spatial join
 
 &lt;img src="index_files/figure-html/unnamed-chunk-15-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
-# Neighbor definition
+## Neighbor definition
 
 Unfortunately for us, "neighborhoods" and "neighbors" have two very distinct meanings in this particular analysis. In spatial data analysis, we think of "neighbors" as how we define whether or not two objects are spatially related. 
 
@@ -305,7 +307,7 @@ Unfortunately for us, "neighborhoods" and "neighbors" have two very distinct mea
 
 ---
 
-# Neighbor definition
+## Neighbor definition
 
 One common and straightforward way to define neighbors is **queen contiguity**.
 
@@ -328,7 +330,7 @@ weights &lt;- nb2listw(nb_queen, style = "B")
 
 ---
 
-# Neighbor definiton
+## Neighbor definiton
 
 &lt;img src="index_files/figure-html/unnamed-chunk-19-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -337,7 +339,7 @@ On average, each of the neighborhoods in Minneapolis has **5.6** queen's case ne
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 
 &lt;div class="figure" style="text-align: center"&gt;
@@ -347,7 +349,7 @@ On average, each of the neighborhoods in Minneapolis has **5.6** queen's case ne
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 ### Moran's I
 
@@ -361,7 +363,7 @@ In order to test the significance of our correlation, we *randomly assign* attri
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 ### Moran's I
 
@@ -387,7 +389,7 @@ moran.mc(honeybees_sp$permits, weights, nsim=9999)
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 ### Moran's I
 
@@ -402,7 +404,7 @@ Based on this, we fail to reject our null hypothesis and say that the permits ar
 
 ---
 
-# Spatial clustering
+## Spatial clustering
 
 &lt;img src="index_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
 
@@ -445,7 +447,7 @@ According to Moran's I, it's moderately clustered by block group. But we found t
 ## weights: weights  
 ## number of simulations + 1: 10000 
 ## 
-## statistic = 0.3072, observed rank = 10000, p-value = 1e-04
+## statistic = 0.20973, observed rank = 10000, p-value = 1e-04
 ## alternative hypothesis: greater
 ```
 
