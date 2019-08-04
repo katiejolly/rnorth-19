@@ -1,5 +1,5 @@
 ---
-title: "Spatial Data Science in R"
+title: "Geographic Data Science in R"
 subtitle: "Katie Jolly"
 author: "Slides: katiejolly.io/rnorth-19"
 date: "August 16, 2019"
@@ -137,7 +137,7 @@ class: inverse, center, middle
 
 * Spatial clustering (Moran's I)
 
-* Fallacy: modifiable areal unit problem
+* Modifiable areal unit problem
 
 
 ---
@@ -472,7 +472,7 @@ bg <- bg_join %>%
   summarise(permits = n()) 
 ```
 
-```{r echo = FALSE}
+```{r echo = FALSE, out.width=6}
 ggplot(bg) +
   geom_sf(aes(fill = permits), color = "#FBF5F3") +
   theme_minimal() +
