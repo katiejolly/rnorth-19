@@ -472,7 +472,8 @@ bg <- bg_join %>%
   summarise(permits = n()) 
 ```
 
-```{r echo = FALSE, out.width=6}
+
+```{r echo = FALSE, fig.width=6, results = 'show'}
 ggplot(bg) +
   geom_sf(aes(fill = permits), color = "#FBF5F3") +
   theme_minimal() +
