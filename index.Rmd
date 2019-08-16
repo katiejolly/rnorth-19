@@ -97,6 +97,12 @@ knitr::include_graphics("https://media.opennews.org/cache/06/37/0637aa2541b31f52
 
 ---
 
+[West Wing video](https://youtu.be/OH1bZ0F3zVU?t=34)
+
+![](images/ww.png)
+
+---
+
 ### Two common projections for US data
 
 When working with something around the size of a **state** or **smaller**, it can often be a good idea to use state plane or UTM projections. <br>
