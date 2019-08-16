@@ -284,7 +284,7 @@ summary(permits_per_nb$permits)
 
 &lt;br&gt;
 
-On average, there are **1.47** honeybee permits per neighborhood. 
+On average, there are **1.437** honeybee permits per neighborhood. 
 
 &lt;br&gt;
 
@@ -301,7 +301,6 @@ But is this equally likely everywhere in the city? Or are permits more likely to
 
 ## Neighbor definition
 
-Unfortunately for us, "neighborhoods" and "neighbors" have two very distinct meanings in this particular analysis. In spatial data analysis, we think of "neighbors" as how we define whether or not two objects are spatially related. 
 
 &lt;img src="http://geohealthinnovations.org/wp-content/uploads/2013/01/toblerquote.png" style="display: block; margin: auto;" /&gt;
 
@@ -341,11 +340,10 @@ On average, each of the neighborhoods in Minneapolis has **5.6** queen's case ne
 
 ## Spatial clustering
 
+&lt;br&gt;
+&lt;br&gt;
 
-&lt;div class="figure" style="text-align: center"&gt;
-&lt;img src="https://mgimond.github.io/Spatial/img/Random_maps.png" alt="Source: Manuel Gimond"  /&gt;
-&lt;p class="caption"&gt;Source: Manuel Gimond&lt;/p&gt;
-&lt;/div&gt;
+&lt;img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlm-7-YfREIPTXXfloomGr0jdZk1GhPimm7WH8lZGWwVQIHzDA" width="500px" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -355,11 +353,11 @@ On average, each of the neighborhoods in Minneapolis has **5.6** queen's case ne
 
 &gt; The Moran’s I statistic is the correlation coefficient for the relationship between a variable [like honeybee permits] and its surrounding values (Gimond)
 
-&lt;br&gt;
 
-__Note: The Monte-Carlo approach to significance__
+&lt;img src="https://mgimond.github.io/Spatial/img/MoranI_scatter_plot.png" width="400px" style="display: block; margin: auto;" /&gt;
 
-In order to test the significance of our correlation, we *randomly assign* attribute values to the polygons, calculate Moran's I, and then repeat for a given number of permutations. Then we compare our observed attribute values to this sampling distribution of Moran’s I values calculated **under the null hypothesis (complete spatial randomness)**.
+
+
 
 ---
 
@@ -397,16 +395,15 @@ statistic = &lt;mark&gt;0.085266&lt;/mark&gt;, observed rank = 9392, p-value = &
 
 Based on this, we fail to reject our null hypothesis and say that the permits are distributed **spatially randomly** across neighborhoods.
 
-&lt;br&gt;
-&lt;br&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" width="250px" style="display: block; margin: auto;" /&gt;
 
-#### Does this make sense?
+Does this make sense?
 
 ---
 
 ## Spatial clustering
 
-&lt;img src="index_files/figure-html/unnamed-chunk-22-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -425,7 +422,7 @@ What if we look at honeybee permits by census block group instead?
 
 
 
-&lt;img src="index_files/figure-html/unnamed-chunk-25-1.png" width="6" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-27-1.png" width="6" style="display: block; margin: auto;" /&gt;
 
 Does this look more or less clustered?
 
