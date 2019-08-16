@@ -99,7 +99,7 @@ knitr::include_graphics("https://media.opennews.org/cache/06/37/0637aa2541b31f52
 
 [West Wing video](https://youtu.be/OH1bZ0F3zVU?t=34)
 
-![](images/ww.png)
+![](images/ww.PNG)
 
 ---
 
