@@ -278,19 +278,19 @@ One way to think about clustering is to ask whether or not the permits are clust
 permits_per_nb &lt;- neighborhoods %&gt;% 
   st_join(honeybees_utm) %&gt;% # which neighborhood is each permit in?
   group_by(BDNAME) %&gt;% # and when we sum by neighborhood
-  summarise(permits = n()) # how many permits total?
+  summarise(permits = sum(!is.na(OBJECTID))) # how many permits total?
 
 summary(permits_per_nb$permits)
 ```
 
 ```
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   1.000   1.000   1.000   1.437   2.000   4.000
+##   0.000   0.000   1.000   1.034   2.000   4.000
 ```
 
 &lt;br&gt;
 
-On average, there are **1.437** honeybee permits per neighborhood. 
+On average, there are **1.034** honeybee permits per neighborhood. 
 
 &lt;br&gt;
 
@@ -387,7 +387,7 @@ moran.mc(honeybees_sp$permits, weights, nsim=9999)
 ## weights: weights  
 ## number of simulations + 1: 10000 
 ## 
-## statistic = 0.085266, observed rank = 9392, p-value = 0.0608
+## statistic = 0.13366, observed rank = 9869, p-value = 0.0131
 ## alternative hypothesis: greater
 ```
 
@@ -397,9 +397,9 @@ moran.mc(honeybees_sp$permits, weights, nsim=9999)
 
 ### Moran's I
 
-statistic = &lt;mark&gt;0.085266&lt;/mark&gt;, observed rank = 9392, p-value = &lt;mark&gt;0.0608&lt;/mark&gt;
+statistic = &lt;mark&gt;0.13366&lt;/mark&gt;, observed rank = 9869, p-value = &lt;mark&gt;0.0131&lt;/mark&gt;
 
-Based on this, we fail to reject our null hypothesis and say that the permits are distributed **spatially randomly** across neighborhoods.
+Based on this, we reject our null hypothesis and say that the permits are **slightly clustered** across neighborhoods.
 
 &lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" width="250px" style="display: block; margin: auto;" /&gt;
 
@@ -418,13 +418,13 @@ Does this make sense?
 
 Grouping points by an areal unit may distort or exaggerate the actual data pattern!
 
-&lt;img src="http://gispopsci.org/wp-content/uploads/2012/09/MAUPZone1.gif" width="200px" style="display: block; margin: auto;" /&gt;
+&lt;img src="http://4.bp.blogspot.com/-_pvMVmjCTQU/TsY9QaWcJaI/AAAAAAAAA30/TGhvGkcnMPY/s1600/Penn+State+Map.gif" width="200px" style="display: block; margin: auto;" /&gt;
 
 ---
 
 ## Modifiable areal unit problem
 
-What if we look at honeybee permits by census block group instead?
+What if we look at honeybee permits by community instead?
 
 
 
@@ -437,7 +437,7 @@ Does this look more or less clustered?
 
 ## Modifiable areal unit problem
 
-According to Moran's I, it's moderately clustered by block group. But we found that it wasn't clustered by neighborhood?
+According to Moran's I, it's spatially random. But we found that it was clustered by neighborhood?
 
 &lt;br&gt;
 &lt;br&gt;
@@ -451,7 +451,7 @@ According to Moran's I, it's moderately clustered by block group. But we found t
 ## weights: weights  
 ## number of simulations + 1: 10000 
 ## 
-## statistic = 0.20973, observed rank = 10000, p-value = 1e-04
+## statistic = -0.10302, observed rank = 5470, p-value = 0.453
 ## alternative hypothesis: greater
 ```
 
